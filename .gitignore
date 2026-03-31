@@ -1,0 +1,12 @@
+execute_tests
+favorites
+build*
+bin
+lib
+libandroid
+libios
+.DS_Store
+*.pro.user*
+./*.sh
+./*.bat
+!./build_scripts/
