@@ -9,5 +9,5 @@ xinit /usr/bin/chromium-browser \
     --test-type \
     --noerrdialogs \
     --disable-infobars \
-    https://romainchevalier27.github.io/Horloge-Meteo/ \
+    https://romainchevalier27.github.io/garlic-pi2/ \
     -- -nocursor
