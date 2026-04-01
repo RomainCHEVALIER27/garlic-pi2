@@ -2,40 +2,44 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Multi-Zone Fixe ADRN</title>
+    <title>Dashboard ADRN Romain</title>
     <style>
-        /* On bloque tout pour éviter les barres de défilement */
+        * { box-sizing: border-box; }
         body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            background: #000; overflow: hidden; 
+            margin: 0; padding: 0; height: 100vh; width: 100vw; 
+            background: #000; overflow: hidden; font-family: sans-serif;
         }
-        /* Grille 2x2 qui prend tout l'écran */
+        /* Grille 2x2 */
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
             grid-template-rows: 50% 50%;
-            height: 100vh;
-            width: 100vw;
-            box-sizing: border-box;
+            height: 100vh; width: 100vw;
         }
         .zone { 
             width: 100%; height: 100%; 
-            border: 1px solid #333; /* Bordure fine pour délimiter les zones */
-            box-sizing: border-box;
-            background: #050505;
+            border: 1px solid #222; overflow: hidden; 
+            background: #000; position: relative;
         }
-        iframe { width: 100%; height: 100%; border: none; }
-        .vide { 
-            display: flex; align-items: center; justify-content: center; 
-            color: #444; font-family: sans-serif; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 2px;
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+
+        /* Style spécial pour la Zone 1 (Ton Nom + Horloge) */
+        .zone-perso {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #00FF00; /* Vert Matrix */
         }
+        .nom { font-size: 3vw; font-weight: bold; margin: 0; text-transform: uppercase; }
+        .horloge { font-size: 6vw; color: white; font-weight: bold; margin-top: 5px; }
+        
+        .label-vide { color: #333; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="zone">
-            <iframe src="https://romainchevalier27.github.io/Info/"></iframe>
+        <div class="zone zone-perso">
+            <div class="nom">ROMAIN CHEVALIER</div>
+            <div id="reloge" class="horloge">00:00:00</div>
         </div>
         
         <div class="zone">
@@ -46,9 +50,21 @@
             <iframe src="https://romainchevalier27.github.io/Test/"></iframe>
         </div>
         
-        <div class="zone vide">
-            Zone Libre
+        <div class="zone">
+            <div class="label-vide">ZONE LIBRE</div>
         </div>
     </div>
+
+    <script>
+        function rafraichir() {
+            const d = new Date();
+            const h = d.getHours().toString().padStart(2, '0');
+            const m = d.getMinutes().toString().padStart(2, '0');
+            const s = d.getSeconds().toString().padStart(2, '0');
+            document.getElementById('reloge').textContent = h + ":" + m + ":" + s;
+        }
+        setInterval(rafraichir, 1000);
+        rafraichir();
+    </script>
 </body>
 </html>
