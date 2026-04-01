@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xml:lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="Content-Language" content="fr">
+    
     <style>
-        /* On bloque tout mouvement et on supprime les marges */
+        /* Force la suppression de tout espace parasite */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body { 
-            height: 100%; width: 100%; 
+            height: 100vh; width: 100vw; 
             background: #000; overflow: hidden; 
-            position: fixed; /* Force la page à rester fixe */
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
         }
 
-        /* La grille prend 100% de la fenêtre visible */
         .container {
             display: grid;
-            grid-template-columns: 50vw 50vw;
-            grid-template-rows: 50vh 50vh;
-            height: 100vh;
-            width: 100vw;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 50% 50%;
+            height: 100vh; width: 100vw;
         }
 
         .zone { 
@@ -28,19 +28,18 @@
             overflow: hidden; 
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            background: #000; color: white;
-            text-align: center;
+            background: #000; color: white; text-align: center;
         }
 
         iframe { width: 100%; height: 100%; border: none; display: block; }
 
-        /* Style Zone 3 (Ton bloc Technicien) */
+        /* Ton Bloc Technicien */
         .titre-adrn { font-size: 2vw; color: white; margin-bottom: 5px; }
         .nom-tech { font-size: 1.5vw; color: #00FF00; }
         .horloge-tech { font-size: 4vw; color: white; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
-<body>
+<body onclick="toggleFullScreen()">
     <div class="container">
         <div class="zone">
             <iframe src="https://romainchevalier27.github.io/Info/"></iframe>
@@ -60,10 +59,20 @@
     </div>
 
     <script>
+        // Met à jour l'horloge
         function clock() {
             document.getElementById('reloge').innerText = new Date().toLocaleTimeString('fr-FR');
         }
         setInterval(clock, 1000); clock();
+
+        // FONCTION POUR FORCER LE PLEIN ÉCRAN
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Erreur plein écran");
+                });
+            }
+        }
     </script>
 </body>
 </html>
