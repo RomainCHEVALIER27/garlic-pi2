@@ -2,66 +2,64 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard ADRN Romain - Full Screen</title>
     <style>
-        * { box-sizing: border-box; }
+        /* Force la suppression de TOUTES les marges et barres */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body, html { 
-            margin: 0; padding: 0; height: 100vh; width: 100vw; 
-            background: #000; overflow: hidden; font-family: sans-serif;
+            height: 100vh; width: 100vw; 
+            background: #000; overflow: hidden; 
+            font-family: sans-serif; cursor: none; /* Cache la souris */
         }
-        /* Grille 2x2 parfaite pour ton écran Dell */
+
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
             grid-template-rows: 50% 50%;
             height: 100vh; width: 100vw;
         }
+
         .zone { 
             width: 100%; height: 100%; 
-            border: 1px solid #222; overflow: hidden; 
-            background: #000; position: relative;
+            border: 1px solid #111; 
+            overflow: hidden; 
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            text-align: center; color: white;
+            background: #000; color: white;
         }
+
         iframe { width: 100%; height: 100%; border: none; display: block; }
 
-        /* Style Zone 1 */
-        .nom-vert { font-size: 3vw; color: #00FF00; font-weight: bold; margin: 0; }
-        
         /* Style Zone 3 (Ton bloc Technicien) */
-        .zone-tech { background-color: black; padding: 20px; }
-        .titre-projet { font-size: 2vw; margin-bottom: 15px; font-weight: bold; }
-        .p-tech { font-size: 1.5vw; margin: 5px 0; }
-        .clock-style { font-size: 4vw; color: white; font-weight: bold; margin-top: 10px; }
+        .titre-adrn { font-size: 2vw; color: white; margin-bottom: 10px; }
+        .nom-tech { font-size: 1.5vw; color: #aaa; }
+        .horloge-tech { font-size: 4vw; color: #00FF00; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="zone">
-            <div class="nom-vert">ROMAIN CHEVALIER</div>
+            <iframe src="https://romainchevalier27.github.io/Info/"></iframe>
         </div>
         
         <div class="zone">
             <iframe src="https://romainchevalier27.github.io/Horloge-Meteo/"></iframe>
         </div>
         
-        <div class="zone zone-tech">
-            <h1 class="titre-projet">PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
-            <p class="p-tech">Technicien : Romain Chevalier</p>
-            <div id="clock" class="clock-style">00:00:00</div>
+        <div class="zone">
+            <h1 class="titre-adrn">PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
+            <p class="nom-tech">Technicien : Romain Chevalier</p>
+            <div id="reloge" class="horloge-tech">00:00:00</div>
         </div>
         
-        <div class="zone" style="color: #333; font-weight: bold;">
-            ZONE LIBRE
-        </div>
+        <div class="zone" style="color: #222;">ZONE LIBRE</div>
     </div>
 
     <script>
-        // L'horloge pour ton bloc Technicien
-        setInterval(() => { 
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString(); 
-        }, 1000);
+        function clock() {
+            document.getElementById('reloge').innerText = new Date().toLocaleTimeString();
+        }
+        setInterval(clock, 1000); clock();
     </script>
 </body>
 </html>
