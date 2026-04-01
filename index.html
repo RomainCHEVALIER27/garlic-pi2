@@ -3,39 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
+    <title>Dashboard ADRN Romain - 4 Zones</title>
     <style>
-        /* FORCE LE PLEIN ÉCRAN AU NIVEAU DU NAVIGATEUR */
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+        /* Suppression totale des marges pour le plein écran Dell */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body { 
             height: 100vh; width: 100vw; 
-            background: #000; 
-            overflow: hidden !important; /* Supprime les barres de défilement */
-            position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: #000; overflow: hidden; 
+            position: fixed; top: 0; left: 0;
         }
 
+        /* Grille 2x2 */
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
             grid-template-rows: 50% 50%;
-            /* On utilise 100vh pour prendre TOUTE la hauteur disponible */
-            height: 100vh; 
-            width: 100vw;
-            border: none;
+            height: 100vh; width: 100vw;
         }
 
         .zone { 
             width: 100%; height: 100%; 
-            border: 1px solid #1a1a1a; 
+            border: 1px solid #1a1a1a; /* Bordure discrète */
+            overflow: hidden; 
             background: #000;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            overflow: hidden;
         }
 
-        iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
 
-        /* Style Zone 3 (Ton bloc Technicien) */
+        /* Style Zone 3 (Bloc Technicien écrit en direct pour éviter les erreurs 404) */
         .titre-adrn { font-size: 2vw; color: white; margin-bottom: 5px; font-family: sans-serif; text-align: center; }
         .nom-tech { font-size: 1.5vw; color: #00FF00; font-family: sans-serif; }
         .horloge-tech { font-size: 5vw; color: white; font-weight: bold; margin-top: 10px; font-family: monospace; }
@@ -57,15 +55,19 @@
             <div id="reloge" class="horloge-tech">00:00:00</div>
         </div>
         
-        <div class="zone" style="color: #222; font-family: sans-serif;">ZONE LIBRE</div>
+        <div class="zone">
+            <iframe src="https://romainchevalier27.github.io/Generique/"></iframe>
+        </div>
     </div>
 
     <script>
+        // Horloge pour la zone 3
         function clock() {
             const d = new Date();
-            document.getElementById('reloge').innerText = d.getHours().toString().padStart(2,'0') + ":" + 
-                                                        d.getMinutes().toString().padStart(2,'0') + ":" + 
-                                                        d.getSeconds().toString().padStart(2,'0');
+            document.getElementById('reloge').innerText = 
+                d.getHours().toString().padStart(2,'0') + ":" + 
+                d.getMinutes().toString().padStart(2,'0') + ":" + 
+                d.getSeconds().toString().padStart(2,'0');
         }
         setInterval(clock, 1000); clock();
     </script>
