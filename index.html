@@ -1,66 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Multi-Affichage ADRN - Romain</title>
+    <title>Multi-Zone Fixe ADRN</title>
     <style>
+        /* On bloque tout pour éviter les barres de défilement */
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
-            background-color: #000; overflow: hidden; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000; overflow: hidden; 
         }
-        /* Grille 2x2 parfaite */
+        /* Grille 2x2 qui prend tout l'écran */
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
             grid-template-rows: 50% 50%;
             height: 100vh;
             width: 100vw;
-            gap: 2px; /* Ligne de séparation fine */
+            box-sizing: border-box;
         }
-        .zone {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #111;
-            position: relative;
-            overflow: hidden;
+        .zone { 
+            width: 100%; height: 100%; 
+            border: 1px solid #333; /* Bordure fine pour délimiter les zones */
+            box-sizing: border-box;
+            background: #050505;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .label {
-            position: absolute; bottom: 0; right: 0;
-            background: rgba(0, 0, 0, 0.6); color: #0f0;
-            padding: 2px 10px; font-size: 10px; z-index: 10;
-            border-top-left-radius: 5px;
-            text-transform: uppercase;
+        iframe { width: 100%; height: 100%; border: none; }
+        .vide { 
+            display: flex; align-items: center; justify-content: center; 
+            color: #444; font-family: sans-serif; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="zone">
-            <div class="label">Flux Infos</div>
             <iframe src="https://romainchevalier27.github.io/Info/"></iframe>
         </div>
         
         <div class="zone">
-            <div class="label">Météo & Heure</div>
             <iframe src="https://romainchevalier27.github.io/Horloge-Meteo/"></iframe>
         </div>
         
         <div class="zone">
-            <div class="label">Test System</div>
             <iframe src="https://romainchevalier27.github.io/Test/"></iframe>
         </div>
         
-        <div class="zone" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #1a1a1a 0%, #000 100%);">
-            <div class="label">Status</div>
-            <div style="color: #444; font-size: 1.2em; font-weight: bold;">ZONE DISPONIBLE</div>
-            <div style="color: #222; font-size: 0.8em;">En attente de source...</div>
+        <div class="zone vide">
+            Zone Libre
         </div>
     </div>
 </body>
