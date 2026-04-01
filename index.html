@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard ADRN Romain - Final</title>
+    <title>Dashboard ADRN Romain - Full Screen</title>
     <style>
         * { box-sizing: border-box; }
         body, html { 
             margin: 0; padding: 0; height: 100vh; width: 100vw; 
             background: #000; overflow: hidden; font-family: sans-serif;
         }
-        /* Grille 2x2 plein écran */
+        /* Grille 2x2 parfaite pour ton écran Dell */
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
@@ -26,28 +26,30 @@
         }
         iframe { width: 100%; height: 100%; border: none; display: block; }
 
-        /* Styles spécifiques aux zones de texte */
-        .titre-vert { font-size: 2.2vw; color: #00FF00; margin: 0; text-transform: uppercase; }
-        .clock-style { font-size: 5vw; font-weight: bold; margin-top: 10px; color: white; }
-        .projet-titre { font-size: 1.8vw; margin-bottom: 5px; color: #aaa; }
-        .tech-nom { font-size: 1.5vw; margin: 0; color: white; }
+        /* Style Zone 1 */
+        .nom-vert { font-size: 3vw; color: #00FF00; font-weight: bold; margin: 0; }
+        
+        /* Style Zone 3 (Ton bloc Technicien) */
+        .zone-tech { background-color: black; padding: 20px; }
+        .titre-projet { font-size: 2vw; margin-bottom: 15px; font-weight: bold; }
+        .p-tech { font-size: 1.5vw; margin: 5px 0; }
+        .clock-style { font-size: 4vw; color: white; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="zone">
-            <div class="titre-vert">ROMAIN CHEVALIER</div>
-            <div id="clock1" class="clock-style">00:00:00</div>
+            <div class="nom-vert">ROMAIN CHEVALIER</div>
         </div>
         
         <div class="zone">
             <iframe src="https://romainchevalier27.github.io/Horloge-Meteo/"></iframe>
         </div>
         
-        <div class="zone" style="background-color: #050505;">
-            <h1 style="font-size: 1.8vw; margin-bottom: 10px;">PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
-            <p class="tech-nom">Technicien : Romain Chevalier</p>
-            <div id="clock2" style="font-size: 3.5vw; color: #00FF00; margin-top: 10px;">00:00:00</div>
+        <div class="zone zone-tech">
+            <h1 class="titre-projet">PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
+            <p class="p-tech">Technicien : Romain Chevalier</p>
+            <div id="clock" class="clock-style">00:00:00</div>
         </div>
         
         <div class="zone" style="color: #333; font-weight: bold;">
@@ -56,14 +58,10 @@
     </div>
 
     <script>
-        function updateAll() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString();
-            document.getElementById('clock1').innerText = timeStr;
-            document.getElementById('clock2').innerText = timeStr;
-        }
-        setInterval(updateAll, 1000);
-        updateAll();
+        // L'horloge pour ton bloc Technicien
+        setInterval(() => { 
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString(); 
+        }, 1000);
     </script>
 </body>
 </html>
