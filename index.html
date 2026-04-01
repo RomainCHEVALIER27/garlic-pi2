@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-<html lang="fr" xml:lang="fr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
-    <meta http-equiv="Content-Language" content="fr">
-    
     <style>
-        /* Force la suppression de tout espace parasite */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* FORCE LE PLEIN ÉCRAN AU NIVEAU DU NAVIGATEUR */
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
         
         html, body { 
             height: 100vh; width: 100vw; 
-            background: #000; overflow: hidden; 
-            position: fixed; top: 0; left: 0;
+            background: #000; 
+            overflow: hidden !important; /* Supprime les barres de défilement */
+            position: fixed; top: 0; left: 0; bottom: 0; right: 0;
         }
 
         .container {
             display: grid;
             grid-template-columns: 50% 50%;
             grid-template-rows: 50% 50%;
-            height: 100vh; width: 100vw;
+            /* On utilise 100vh pour prendre TOUTE la hauteur disponible */
+            height: 100vh; 
+            width: 100vw;
+            border: none;
         }
 
         .zone { 
             width: 100%; height: 100%; 
-            border: 1px solid #111; 
-            overflow: hidden; 
+            border: 1px solid #1a1a1a; 
+            background: #000;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            background: #000; color: white; text-align: center;
+            overflow: hidden;
         }
 
-        iframe { width: 100%; height: 100%; border: none; display: block; }
+        iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
 
-        /* Ton Bloc Technicien */
-        .titre-adrn { font-size: 2vw; color: white; margin-bottom: 5px; }
-        .nom-tech { font-size: 1.5vw; color: #00FF00; }
-        .horloge-tech { font-size: 4vw; color: white; font-weight: bold; margin-top: 10px; }
+        /* Style Zone 3 (Ton bloc Technicien) */
+        .titre-adrn { font-size: 2vw; color: white; margin-bottom: 5px; font-family: sans-serif; text-align: center; }
+        .nom-tech { font-size: 1.5vw; color: #00FF00; font-family: sans-serif; }
+        .horloge-tech { font-size: 5vw; color: white; font-weight: bold; margin-top: 10px; font-family: monospace; }
     </style>
 </head>
-<body onclick="toggleFullScreen()">
+<body>
     <div class="container">
         <div class="zone">
             <iframe src="https://romainchevalier27.github.io/Info/"></iframe>
@@ -55,24 +57,17 @@
             <div id="reloge" class="horloge-tech">00:00:00</div>
         </div>
         
-        <div class="zone" style="color: #222;">ZONE LIBRE</div>
+        <div class="zone" style="color: #222; font-family: sans-serif;">ZONE LIBRE</div>
     </div>
 
     <script>
-        // Met à jour l'horloge
         function clock() {
-            document.getElementById('reloge').innerText = new Date().toLocaleTimeString('fr-FR');
+            const d = new Date();
+            document.getElementById('reloge').innerText = d.getHours().toString().padStart(2,'0') + ":" + 
+                                                        d.getMinutes().toString().padStart(2,'0') + ":" + 
+                                                        d.getSeconds().toString().padStart(2,'0');
         }
         setInterval(clock, 1000); clock();
-
-        // FONCTION POUR FORCER LE PLEIN ÉCRAN
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log("Erreur plein écran");
-                });
-            }
-        }
     </script>
 </body>
 </html>
