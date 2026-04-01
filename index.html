@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:black; color:white; text-align:center; font-family:sans-serif; padding-top:20%;">
+    <h1>PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
+    <p>Technicien : Romain Chevalier</p>
+    <div id="clock" style="font-size:3em;"></div>
+    <script>
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+    </script>
+</body>
+</html>
