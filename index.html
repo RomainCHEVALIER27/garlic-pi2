@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
-<body style="background-color:black; color:white; text-align:center; font-family:sans-serif; padding-top:20%;">
-    <h1>PROJET ADRN - AFFICHAGE DYNAMIQUE</h1>
-    <p>Technicien : Romain Chevalier</p>
-    <div id="clock" style="font-size:3em;"></div>
+<head>
+    <title>Playlist ADRN - Romain</title>
+    <style>
+        body, html, iframe { margin: 0; padding: 0; height: 100%; width: 100%; border: none; overflow: hidden; background-color: black; }
+    </style>
+</head>
+<body>
+    <iframe id="display-frame" src="" allow="autoplay"></iframe>
+
     <script>
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+        const pages = [
+            { url: "https://romainchevalier27.github.io/Info/", time: 10000 }, // 10 secondes
+            { url: "https://romainchevalier27.github.io/Horloge-Meteo/", time: 20000 } // 20 secondes
+        ];
+        let currentIndex = 0;
+
+        function updatePage() {
+            const frame = document.getElementById('display-frame');
+            frame.src = pages[currentIndex].url;
+            
+            // On calcule le prochain index
+            currentIndex = (currentIndex + 1) % pages.length;
+            
+            // On attend le temps défini avant de relancer la fonction
+            setTimeout(updatePage, pages[currentIndex === 0 ? pages.length - 1 : currentIndex - 1].time);
+        }
+
+        updatePage();
     </script>
 </body>
 </html>
