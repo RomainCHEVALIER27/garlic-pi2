@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="notranslate">
 <head>
     <meta charset="UTF-8">
-    <title>Garlic Pi 2 - Dashboard Final 10s</title>
+    <meta name="google" content="notranslate">
+    <title>Garlic Pi 2 - Dashboard Final Anti-Barre</title>
     <style>
+        /* Supprime les marges et cache tout ce qui dépasse */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
-            width: 100vw; height: 100vh; 
-            background-color: #000; overflow: hidden; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #000; 
+            overflow: hidden; 
         }
 
-        /* Grille 2x2 */
+        /* Grille 2x2 parfaite */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            width: 100%; height: 100%;
-            gap: 10px; padding: 10px;
+            width: 100%; 
+            height: 100%;
+            gap: 10px; 
+            padding: 10px;
         }
 
-        /* Style des iframes (Zones 1, 2, 3) */
+        /* Style des 3 premières cases (tes sites GitHub) */
         iframe {
-            width: 100%; height: 100%;
-            border: 2px solid #2ecc71;
+            width: 100%; 
+            height: 100%;
+            border: 2px solid #2ecc71; /* Bordure verte Garlic */
             border-radius: 10px;
             background-color: #111;
         }
 
-        /* Zone 4 : Picsum Dynamique */
+        /* Style de la 4ème case (Picsum) */
         .zone-picsum {
-            width: 100%; height: 100%;
-            border: 2px solid #f1c40f;
+            width: 100%; 
+            height: 100%;
+            border: 2px solid #f1c40f; /* Bordure jaune pour le dynamisme */
             border-radius: 10px;
             overflow: hidden;
             background-color: #000;
         }
         
         #picsum-img {
-            width: 100%; height: 100%;
-            object-fit: cover;
+            width: 100%; 
+            height: 100%;
+            object-fit: cover; /* Remplit toute la case proprement */
         }
     </style>
 </head>
@@ -60,15 +69,15 @@
         const imgElement = document.getElementById('picsum-img');
 
         function updateImage() {
-            // Le timestamp évite que le Pi garde la même image en cache
+            // Le "?t=" force le Raspberry Pi à télécharger une nouvelle image au lieu d'utiliser le cache
             const newUrl = "https://picsum.photos/1680/1050?t=" + new Date().getTime();
             imgElement.src = newUrl;
         }
 
-        // --- CHANGEMENT TOUTES LES 10 SECONDES ---
-        setInterval(updateImage, 10000); 
+        // Configuration du changement : 10000 ms = 10 secondes
+        setInterval(updateImage, 10000);
 
-        // Premier chargement forcé au démarrage
+        // On lance une première fois au chargement
         updateImage();
     </script>
 </body>
