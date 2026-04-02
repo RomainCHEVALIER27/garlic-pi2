@@ -2,113 +2,50 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="google" content="notranslate">
-    <title>ADRN Garlic Player - Romain</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garlic Pi 2 - Dashboard</title>
     <style>
-        /* Couleur de fond officielle GitHub Dark pour l'harmonie totale */
-        :root { --gh-bg: #0d1117; }
+        /* Supprime les marges blanches autour du site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        html, body { 
-            height: 100vh; width: 100vw; 
-            background-color: var(--gh-bg) !important; 
-            color: white; overflow: hidden; 
-            position: fixed; top: 0; left: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        body {
+            background-color: #000; /* Fond noir pour le look pro */
+            color: white;
+            font-family: sans-serif;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Empêche de scroller */
         }
 
         .container {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            grid-template-rows: 50% 50%;
-            height: 100vh; width: 100vw;
-            background-color: var(--gh-bg);
+            width: 95%;  /* On laisse 5% de marge pour la sécurité du cadrage */
+            height: 95%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
         }
 
-        .zone { 
-            width: 100%; height: 100%; 
-            border: 1px solid #30363d; /* Bordure type GitHub */
-            background-color: var(--gh-bg);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            overflow: hidden;
-            position: relative;
+        img {
+            max-width: 100%;
+            max-height: 80%; /* Le logo prend la place sans dépasser */
+            object-fit: contain;
         }
-
-        /* Conteneur pour le contenu dynamique */
-        #display-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        iframe, video, img { width: 100%; height: 100%; border: none; display: block; object-fit: contain; background: transparent; }
-
-        /* Style Zone 3 (Infos fixes) */
-        .titre-adrn { font-size: 1.8vw; color: #f0f6fc; margin-bottom: 5px; text-align: center; }
-        .nom-tech { font-size: 1.5vw; color: #39d353; font-weight: bold; }
-        .horloge-tech { font-size: 5vw; color: #f0f6fc; font-weight: bold; margin-top: 10px; font-family: monospace; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="zone"><iframe src="https://romainchevalier27.github.io/Info/"></iframe></div>
-        
-        <div class="zone"><iframe src="https://romainchevalier27.github.io/Horloge-Meteo/"></iframe></div>
-        
-        <div class="zone">
-            <h1 class="titre-adrn">ADRN - AFFICHAGE DYNAMIQUE</h1>
-            <p class="nom-tech">Technicien : Romain Chevalier</p>
-            <div id="reloge" class="horloge-tech">00:00:00</div>
-        </div>
-
-        <div class="zone" id="zone4">
-            <div id="display-container"></div>
-        </div>
+        <h1>GARLIC PI 2 - PROJET 4EME ECRAN</h1>
+        <img src="ton-logo.png" alt="Garlic Logo">
+        <p>Statut : Connecté - Résolution 16/10</p>
     </div>
-
-    <script>
-        // 1. GESTION DE L'HORLOGE
-        function clock() {
-            const d = new Date();
-            document.getElementById('reloge').innerText = 
-                d.getHours().toString().padStart(2,'0') + ":" + 
-                d.getMinutes().toString().padStart(2,'0') + ":" + 
-                d.getSeconds().toString().padStart(2,'0');
-        }
-        setInterval(clock, 1000); clock();
-
-        // 2. TA PLAYLIST (A JUSTER SELON TES FICHIERS SUR GITHUB)
-        const playlist = [
-            { type: 'iframe', src: 'https://romainchevalier27.github.io/Generique/', duration: 15000 },
-            { type: 'img',    src: 'https://romainchevalier27.github.io/garlic-pi2/image1.jpg', duration: 10000 },
-            { type: 'img',    src: 'https://romainchevalier27.github.io/garlic-pi2/image2.png', duration: 10000 },
-            { type: 'video',  src: 'https://romainchevalier27.github.io/garlic-pi2/video1.mp4' },
-            { type: 'img',    src: 'https://romainchevalier27.github.io/garlic-pi2/animation.gif', duration: 12000 }
-        ];
-
-        let index = 0;
-        const container = document.getElementById('display-container');
-
-        function playNext() {
-            const media = playlist[index];
-            container.innerHTML = ''; // Nettoyage de la zone
-
-            if (media.type === 'iframe') {
-                container.innerHTML = `<iframe src="${media.src}"></iframe>`;
-                setTimeout(playNext, media.duration);
-            } 
-            else if (media.type === 'img') {
-                container.innerHTML = `<img src="${media.src}">`;
-                setTimeout(playNext, media.duration);
-            } 
-            else if (media.type === 'video') {
-                // muted est obligatoire pour l'autoplay
-                container.innerHTML = `<video id="v" autoplay muted><source src="${media.src}" type="video/mp4"></video>`;
-                document.getElementById('v').onended = playNext; 
-            }
-
-            index = (index + 1) % playlist.length; // Boucle infinie
-        }
-
-        // Lancement immédiat au chargement
-        window.onload = playNext;
-    </script>
 </body>
 </html>
