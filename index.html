@@ -2,87 +2,78 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Garlic Pi 2 - Dashboard Complet</title>
+    <title>Garlic Pi 2 - Dashboard Multi-Sites</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100vw; height: 100vh; background-color: #000; overflow: hidden; font-family: 'Segoe UI', sans-serif; color: white; }
+        body, html { 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #000; 
+            overflow: hidden; 
+        }
 
+        /* Grille 2x2 */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             width: 100%;
             height: 100%;
-            gap: 15px;
-            padding: 15px;
+            gap: 10px;
+            padding: 10px;
         }
 
-        .zone {
-            background: linear-gradient(145deg, #1a1a1a, #000);
-            border: 2px solid #2ecc71;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        /* Style des fenêtres (iframes) */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #2ecc71; /* Bordure verte Garlic */
+            border-radius: 10px;
+            background-color: #111;
         }
 
-        /* Styles des Widgets */
-        .title { color: #2ecc71; font-size: 1.2vw; text-transform: uppercase; margin-bottom: 10px; }
-        .clock { font-size: 4vw; font-weight: bold; }
-        .temp { font-size: 3vw; color: #f1c40f; }
-        .info { font-size: 1.5vw; }
-
-        /* Zone 4 Dynamique */
-        #media-zone { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+        /* Zone 4 : La zone qui change */
+        .zone-dynamique {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #f1c40f;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        #dynamic-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
     <div class="grid-container">
-        <div class="zone">
-            <div class="title">Heure Locale</div>
-            <div id="clock" class="clock">00:00:00</div>
-        </div>
+        <iframe src="https://romainchevalier27.github.io/Info/" scrolling="no"></iframe>
 
-        <div class="zone">
-            <div class="title">Météo</div>
-            <div class="temp">22°C</div>
-            <div class="info">Ensoleillé</div>
-        </div>
+        <iframe src="https://romainchevalier27.github.io/Horloge-Meteo/" scrolling="no"></iframe>
 
-        <div class="zone">
-            <div class="title">Utilisateur</div>
-            <div class="info">GARLIC PI 2</div>
-            <div style="color: #888; margin-top:10px;">Système OK</div>
-        </div>
+        <iframe src="https://romainchevalier27.github.io/Generique/" scrolling="no"></iframe>
 
-        <div class="zone" style="border-color: #3498db;">
-            <img id="media-zone" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500" alt="Media">
+        <div class="zone-dynamique">
+            <img id="dynamic-media" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Media">
         </div>
     </div>
 
     <script>
-        // 1. Script de l'horloge
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // 2. Script de changement de l'image (Zone 4)
+        // Script pour faire changer l'image de la case 4 toutes les 10 secondes
         const images = [
-            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500",
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500",
-            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
+            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600",
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600"
         ];
         let i = 0;
         setInterval(() => {
             i = (i + 1) % images.length;
-            document.getElementById('media-zone').src = images[i];
-        }, 5000);
+            document.getElementById('dynamic-media').src = images[i];
+        }, 10000);
     </script>
 </body>
 </html>
