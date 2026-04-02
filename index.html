@@ -2,72 +2,87 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Garlic Pi 2 - 4 Affichages</title>
+    <title>Garlic Pi 2 - Multi-Zone</title>
     <style>
-        /* Reset pour le plein écran */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body, html {
-            width: 100vw;
-            height: 100vh;
-            background-color: #000;
-            overflow: hidden;
-            font-family: sans-serif;
-        }
+        body, html { width: 100vw; height: 100vh; background-color: #000; overflow: hidden; font-family: sans-serif; color: white; }
 
-        /* La Grille Magique (2 colonnes, 2 lignes) */
+        /* Grille 2x2 */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             width: 100%;
             height: 100%;
-            gap: 10px; /* Espace entre les cases */
-            padding: 10px;
+            gap: 15px;
+            padding: 15px;
         }
 
-        /* Style de chaque zone d'affichage */
         .zone {
-            background-color: #1a1a1a;
-            border: 2px solid #2ecc71; /* Bordure verte Garlic */
-            border-radius: 10px;
+            background-color: #111;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
+            border: 2px solid #333;
+            overflow: hidden;
+            position: relative;
         }
 
-        .zone h2 { font-size: 1.5vw; color: #2ecc71; margin-bottom: 10px; }
-        .zone .data { font-size: 3vw; font-weight: bold; }
+        /* Zones Fixes (1, 2, 3) */
+        .zone-fixe h2 { color: #2ecc71; font-size: 1.2vw; margin-bottom: 5px; }
+        .zone-fixe .value { font-size: 2.5vw; font-weight: bold; }
 
-        /* Couleurs différentes pour bien voir les 4 zones */
-        .z1 { border-color: #e74c3c; } /* Rouge */
-        .z2 { border-color: #3498db; } /* Bleu */
-        .z3 { border-color: #f1c40f; } /* Jaune */
-        .z4 { border-color: #2ecc71; } /* Vert */
+        /* Zone 4 Dynamique (Plein écran dans sa case) */
+        .zone-dynamique {
+            border: 3px solid #f1c40f; /* Contour jaune pour la zone média */
+            background-color: #000;
+        }
 
+        .zone-dynamique video, .zone-dynamique img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'image ou vidéo remplit toute la case 4 */
+        }
+
+        .label-flash {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(241, 196, 15, 0.8);
+            color: black;
+            padding: 2px 8px;
+            font-size: 0.8vw;
+            font-weight: bold;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
 
     <div class="grid-container">
-        <div class="zone z1">
-            <h2>AFFICHAGE 1</h2>
-            <div class="data">TEMPÉRATURE</div>
+        <div class="zone zone-fixe">
+            <h2>STATUT SYSTÈME</h2>
+            <div class="value">ONLINE</div>
         </div>
-        <div class="zone z2">
-            <h2>AFFICHAGE 2</h2>
-            <div class="data">HUMIDITÉ</div>
+
+        <div class="zone zone-fixe">
+            <h2>TEMPÉRATURE PI</h2>
+            <div class="value">42°C</div>
         </div>
-        <div class="zone z3">
-            <h2>AFFICHAGE 3</h2>
-            <div class="data">SYSTÈME</div>
+
+        <div class="zone zone-fixe">
+            <h2>PROJET</h2>
+            <div class="value">GARLIC PI 2</div>
         </div>
-        <div class="zone z4">
-            <h2>AFFICHAGE 4</h2>
-            <div class="data">GARLIC PI 2</div>
+
+        <div class="zone zone-dynamique">
+            <div class="label-flash">LIVE MEDIA</div>
+            <video autoplay muted loop>
+                <source src="ton-video.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500" alt="Backup Image">
+            </video>
         </div>
     </div>
 
