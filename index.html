@@ -3,51 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
-    <title>Garlic Pi 2 - Dashboard Final Anti-Barre</title>
+    <title>Garlic Pi 2 - Optimized</title>
     <style>
-        /* Supprime les marges et cache tout ce qui dépasse */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
-            width: 100vw; 
-            height: 100vh; 
-            background-color: #000; 
-            overflow: hidden; 
+            width: 100vw; height: 100vh; 
+            background-color: #000; overflow: hidden; 
         }
 
-        /* Grille 2x2 parfaite */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            width: 100%; 
-            height: 100%;
-            gap: 10px; 
-            padding: 10px;
+            width: 100%; height: 100%;
+            gap: 10px; padding: 10px;
         }
 
-        /* Style des 3 premières cases (tes sites GitHub) */
         iframe {
-            width: 100%; 
-            height: 100%;
-            border: 2px solid #2ecc71; /* Bordure verte Garlic */
+            width: 100%; height: 100%;
+            border: 2px solid #2ecc71;
             border-radius: 10px;
             background-color: #111;
         }
 
-        /* Style de la 4ème case (Picsum) */
         .zone-picsum {
-            width: 100%; 
-            height: 100%;
-            border: 2px solid #f1c40f; /* Bordure jaune pour le dynamisme */
+            width: 100%; height: 100%;
+            border: 2px solid #f1c40f;
             border-radius: 10px;
             overflow: hidden;
             background-color: #000;
         }
         
         #picsum-img {
-            width: 100%; 
-            height: 100%;
-            object-fit: cover; /* Remplit toute la case proprement */
+            width: 100%; height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -55,13 +44,11 @@
 
     <div class="grid-container">
         <iframe src="https://romainchevalier27.github.io/Info/" scrolling="no"></iframe>
-
         <iframe src="https://romainchevalier27.github.io/Horloge-Meteo/" scrolling="no"></iframe>
-
         <iframe src="https://romainchevalier27.github.io/Generique/" scrolling="no"></iframe>
 
         <div class="zone-picsum">
-            <img id="picsum-img" src="https://picsum.photos/1680/1050" alt="Picsum Image">
+            <img id="picsum-img" src="https://picsum.photos/800/600" alt="Picsum">
         </div>
     </div>
 
@@ -69,15 +56,13 @@
         const imgElement = document.getElementById('picsum-img');
 
         function updateImage() {
-            // Le "?t=" force le Raspberry Pi à télécharger une nouvelle image au lieu d'utiliser le cache
-            const newUrl = "https://picsum.photos/1680/1050?t=" + new Date().getTime();
+            // Taille 800x600 pour soulager le processeur du Pi 2
+            const newUrl = "https://picsum.photos/800/600?t=" + new Date().getTime();
             imgElement.src = newUrl;
         }
 
-        // Configuration du changement : 10000 ms = 10 secondes
-        setInterval(updateImage, 10000);
-
-        // On lance une première fois au chargement
+        // Changement toutes les 20 secondes (20000ms)
+        setInterval(updateImage, 20000);
         updateImage();
     </script>
 </body>
