@@ -2,14 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Garlic Pi 2 - Dashboard Multi-Sites</title>
+    <title>Garlic Pi 2 - Dashboard Final 10s</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
-            width: 100vw; 
-            height: 100vh; 
-            background-color: #000; 
-            overflow: hidden; 
+            width: 100vw; height: 100vh; 
+            background-color: #000; overflow: hidden; 
         }
 
         /* Grille 2x2 */
@@ -17,33 +15,29 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            width: 100%;
-            height: 100%;
-            gap: 10px;
-            padding: 10px;
+            width: 100%; height: 100%;
+            gap: 10px; padding: 10px;
         }
 
-        /* Style des fenêtres (iframes) */
+        /* Style des iframes (Zones 1, 2, 3) */
         iframe {
-            width: 100%;
-            height: 100%;
-            border: 2px solid #2ecc71; /* Bordure verte Garlic */
+            width: 100%; height: 100%;
+            border: 2px solid #2ecc71;
             border-radius: 10px;
             background-color: #111;
         }
 
-        /* Zone 4 : La zone qui change */
-        .zone-dynamique {
-            width: 100%;
-            height: 100%;
+        /* Zone 4 : Picsum Dynamique */
+        .zone-picsum {
+            width: 100%; height: 100%;
             border: 2px solid #f1c40f;
             border-radius: 10px;
             overflow: hidden;
+            background-color: #000;
         }
         
-        #dynamic-media {
-            width: 100%;
-            height: 100%;
+        #picsum-img {
+            width: 100%; height: 100%;
             object-fit: cover;
         }
     </style>
@@ -57,23 +51,25 @@
 
         <iframe src="https://romainchevalier27.github.io/Generique/" scrolling="no"></iframe>
 
-        <div class="zone-dynamique">
-            <img id="dynamic-media" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Media">
+        <div class="zone-picsum">
+            <img id="picsum-img" src="https://picsum.photos/1680/1050" alt="Picsum Image">
         </div>
     </div>
 
     <script>
-        // Script pour faire changer l'image de la case 4 toutes les 10 secondes
-        const images = [
-            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600",
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
-            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600"
-        ];
-        let i = 0;
-        setInterval(() => {
-            i = (i + 1) % images.length;
-            document.getElementById('dynamic-media').src = images[i];
-        }, 10000);
+        const imgElement = document.getElementById('picsum-img');
+
+        function updateImage() {
+            // Le timestamp évite que le Pi garde la même image en cache
+            const newUrl = "https://picsum.photos/1680/1050?t=" + new Date().getTime();
+            imgElement.src = newUrl;
+        }
+
+        // --- CHANGEMENT TOUTES LES 10 SECONDES ---
+        setInterval(updateImage, 10000); 
+
+        // Premier chargement forcé au démarrage
+        updateImage();
     </script>
 </body>
 </html>
