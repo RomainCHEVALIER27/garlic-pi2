@@ -2,76 +2,72 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garlic Pi 2 - Dashboard</title>
+    <title>Garlic Pi 2 - 4 Affichages</title>
     <style>
-        /* 1. Reset total pour supprimer les bordures blanches */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* 2. On force le site à faire exactement la taille de l'écran */
-        html, body {
+        /* Reset pour le plein écran */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body, html {
             width: 100vw;
             height: 100vh;
-            background-color: #000; /* Fond noir pour éviter les flashs blancs */
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Interdit le scroll (barres de défilement) */
+            background-color: #000;
+            overflow: hidden;
+            font-family: sans-serif;
         }
 
-        /* 3. Le conteneur qui centre tout le contenu */
-        .main-container {
+        /* La Grille Magique (2 colonnes, 2 lignes) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             width: 100%;
             height: 100%;
+            gap: 10px; /* Espace entre les cases */
+            padding: 10px;
+        }
+
+        /* Style de chaque zone d'affichage */
+        .zone {
+            background-color: #1a1a1a;
+            border: 2px solid #2ecc71; /* Bordure verte Garlic */
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centre verticalement */
-            align-items: center;     /* Centre horizontalement */
-            border: 5px solid #2ecc71; /* Cadre vert pour voir les limites de l'écran */
-        }
-
-        h1 {
-            font-size: 5vw; /* Taille de texte qui s'adapte à la largeur */
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-
-        .logo-placeholder {
-            width: 60%;
-            height: 50%;
-            background-color: #333;
-            display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 2rem;
-            border: 2px dashed #666;
+            color: white;
+            text-align: center;
         }
 
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 1.2rem;
-            color: #888;
-        }
+        .zone h2 { font-size: 1.5vw; color: #2ecc71; margin-bottom: 10px; }
+        .zone .data { font-size: 3vw; font-weight: bold; }
+
+        /* Couleurs différentes pour bien voir les 4 zones */
+        .z1 { border-color: #e74c3c; } /* Rouge */
+        .z2 { border-color: #3498db; } /* Bleu */
+        .z3 { border-color: #f1c40f; } /* Jaune */
+        .z4 { border-color: #2ecc71; } /* Vert */
+
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <h1>Garlic Pi 2</h1>
-        
-        <div class="logo-placeholder">
-            VOTRE LOGO ICI
+    <div class="grid-container">
+        <div class="zone z1">
+            <h2>AFFICHAGE 1</h2>
+            <div class="data">TEMPÉRATURE</div>
         </div>
-
-        <div class="footer">
-            Affichage 16/10 - Mode Kiosk Actif
+        <div class="zone z2">
+            <h2>AFFICHAGE 2</h2>
+            <div class="data">HUMIDITÉ</div>
+        </div>
+        <div class="zone z3">
+            <h2>AFFICHAGE 3</h2>
+            <div class="data">SYSTÈME</div>
+        </div>
+        <div class="zone z4">
+            <h2>AFFICHAGE 4</h2>
+            <div class="data">GARLIC PI 2</div>
         </div>
     </div>
 
