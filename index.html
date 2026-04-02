@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Garlic Pi 2 - Multi-Zone</title>
+    <title>Garlic Pi 2 - Dashboard 4 Zones</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { width: 100vw; height: 100vh; background-color: #000; overflow: hidden; font-family: sans-serif; color: white; }
@@ -14,77 +14,84 @@
             grid-template-rows: 1fr 1fr;
             width: 100%;
             height: 100%;
-            gap: 15px;
-            padding: 15px;
+            gap: 10px;
+            padding: 10px;
         }
 
         .zone {
             background-color: #111;
-            border-radius: 12px;
+            border: 2px solid #2ecc71; /* Vert Garlic */
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 2px solid #333;
             overflow: hidden;
             position: relative;
         }
 
-        /* Zones Fixes (1, 2, 3) */
-        .zone-fixe h2 { color: #2ecc71; font-size: 1.2vw; margin-bottom: 5px; }
-        .zone-fixe .value { font-size: 2.5vw; font-weight: bold; }
+        /* Style des textes Garlic */
+        .zone h2 { font-size: 1.5vw; color: #2ecc71; margin-bottom: 10px; }
+        .zone p { font-size: 2vw; font-weight: bold; }
 
-        /* Zone 4 Dynamique (Plein écran dans sa case) */
-        .zone-dynamique {
-            border: 3px solid #f1c40f; /* Contour jaune pour la zone média */
-            background-color: #000;
-        }
-
-        .zone-dynamique video, .zone-dynamique img {
+        /* Zone 4 : Le Diaporama */
+        #media-container {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* L'image ou vidéo remplit toute la case 4 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        .label-flash {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(241, 196, 15, 0.8);
-            color: black;
-            padding: 2px 8px;
-            font-size: 0.8vw;
-            font-weight: bold;
-            border-radius: 4px;
+        #media-container img, #media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
 
     <div class="grid-container">
-        <div class="zone zone-fixe">
-            <h2>STATUT SYSTÈME</h2>
-            <div class="value">ONLINE</div>
-        </div>
-
-        <div class="zone zone-fixe">
-            <h2>TEMPÉRATURE PI</h2>
-            <div class="value">42°C</div>
-        </div>
-
-        <div class="zone zone-fixe">
+        <div class="zone">
             <h2>PROJET</h2>
-            <div class="value">GARLIC PI 2</div>
+            <p>GARLIC PI 2</p>
         </div>
 
-        <div class="zone zone-dynamique">
-            <div class="label-flash">LIVE MEDIA</div>
-            <video autoplay muted loop>
-                <source src="ton-video.mp4" type="video/mp4">
-                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500" alt="Backup Image">
-            </video>
+        <div class="zone">
+            <h2>STATUT</h2>
+            <p>EN LIGNE</p>
+        </div>
+
+        <div class="zone">
+            <h2>SYSTÈME</h2>
+            <p>PI 2 - 16/10</p>
+        </div>
+
+        <div class="zone" style="border-color: #f1c40f;">
+            <div id="media-container">
+                <img id="dynamic-content" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800" alt="Media">
+            </div>
         </div>
     </div>
 
+    <script>
+        // Liste de tes images ou vidéos sur GitHub
+        const playlist = [
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800", // Image 1
+            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800", // Image 2
+            "ton-video.mp4" // Si tu as une vidéo sur ton GitHub
+        ];
+
+        let index = 0;
+        const mediaElement = document.getElementById('dynamic-content');
+
+        function changeMedia() {
+            index = (index + 1) % playlist.length;
+            mediaElement.src = playlist[index];
+        }
+
+        // Change toutes les 5 secondes (5000ms)
+        setInterval(changeMedia, 5000);
+    </script>
 </body>
 </html>
